@@ -22,9 +22,8 @@ func NewUserSQL(master *sql.DB, slaves ...*sql.DB) user.Storage {
 	}
 }
 
-// getUserSQLSlaveDB is used to get a Slave Database for running read only queries.
-// This function will return a Master DB only if there are no SlaveDB's declared
-// in the userSQL struct.
+// getUserSQLSlaveDB is used to get a Slave Database for running read only
+// queries. This function returns the master when no slaves have been declared.
 func (usql userSQL) getUserSQLSlaveDB() *sql.DB {
 	if len(usql.slaves) > 0 {
 		return usql.slaves[rand.Intn(len(usql.slaves))]
@@ -44,7 +43,7 @@ func (usql userSQL) CreateUser(u user.User) (user.User, error) {
 		return user.User{}, err
 	}
 
-	// Note: u.Created / u.Updated are not being populated at this time.
+	// Note: u.Created / u.Updated are not being populated here.
 	u.ID, err = res.LastInsertId()
 	if err != nil {
 		return user.User{}, err
@@ -101,6 +100,7 @@ func (usql userSQL) UpsertUser(u user.User) (user.User, error) {
 		return user.User{}, err
 	}
 
+	// Note: u.Created / u.Updated are not being populated here.
 	if res.RowsAffected() == 1 {
 		u.ID = res.LastInsertId()
 	}
@@ -115,7 +115,7 @@ func (usql userSQL) DeleteUser(u user.User) error {
 		DELETE FROM users
 		WHERE id = ?`
 
-	_, err := db.Exec(query, u.ID, u.Email, u.Status.String())
+	_, err := db.Exec(query, u.ID)
 	if err != nil {
 		return user.User{}, err
 	}

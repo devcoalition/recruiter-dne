@@ -6,6 +6,8 @@ import (
 	"github.com/devcoalition/recruiter-dne/storage/rep"
 )
 
+// Recruiter is the domain type for a recruiter object, which contains a
+// list of their reputation.
 type Recruiter struct {
 	ID      int
 	Email   string
@@ -15,6 +17,9 @@ type Recruiter struct {
 	Updated time.Time
 }
 
+// Storage represents the suite of interfaces by which a Recruiter can be
+// manipulated. A new storage implementation must support all of these
+// interfaces.
 type Storage interface {
 	Creator
 	Retriever
