@@ -1,12 +1,18 @@
 package recruiter
 
-import "github.com/devcoalition/recruiter-dne/storage/rep"
+import (
+	"time"
+
+	"github.com/devcoalition/recruiter-dne/storage/rep"
+)
 
 type Recruiter struct {
-	ID    int
-	Email string
-	Name  string
-	Reps  []rep.Rep
+	ID      int
+	Email   string
+	Name    string
+	Reps    []rep.Rep
+	Created time.Time
+	Updated time.Time
 }
 
 type Storage interface {

@@ -1,12 +1,13 @@
 package user
 
-import "github.com/devcoalition/recruiter-dne/storage/rep"
+import "time"
 
 type User struct {
-	ID     int
-	Email  string
-	Status string
-	Reps   []rep.Rep
+	ID      int
+	Email   string
+	Status  string
+	Created time.Time
+	Updated time.Time
 }
 
 type Storage interface {

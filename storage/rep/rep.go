@@ -3,11 +3,15 @@ package rep
 import "time"
 
 type Rep struct {
+	ID          int
 	UserID      int
 	RecruiterID int
-	Value       bool
-	Date        time.Time
-	EmailGob    string // * Figure out right data structure for this
+	Score       int
+	EmailBlob   string // * Figure out right data structure for this
+	Created     time.Time
+	Updated     time.Time
+	// * Could have this enum limited to several values, such as "spam email", "cold call", "got me a job", "great negotiator"
+	// Reason      string
 }
 
 type Storage interface {
