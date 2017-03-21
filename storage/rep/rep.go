@@ -7,11 +7,10 @@ type Rep struct {
 	UserID      int
 	RecruiterID int
 	Score       int
+	Reason      string // * Probably won't to make this an enum once you've thought of all possible values on the frontend
 	EmailBlob   string // * Figure out right data structure for this
 	Created     time.Time
 	Updated     time.Time
-	// * Could have this enum limited to several values, such as "spam email", "cold call", "got me a job", "great negotiator"
-	// Reason      string
 }
 
 type Storage interface {

@@ -9,12 +9,15 @@ import (
 // Recruiter is the domain type for a recruiter object, which contains a
 // list of their reputation.
 type Recruiter struct {
-	ID      int
-	Email   string
-	Name    string
-	Reps    []rep.Rep
-	Created time.Time
-	Updated time.Time
+	ID       int       `json:"id"`
+	Email    string    `json:"email"`
+	Name     string    `json:"name"`
+	Company  string    `json:"company,omitempty"`
+	Reps     []rep.Rep `json:"reps,omitempty"`
+	Score    int       `json:"score"`
+	Created  time.Time `json:"created,omitempty"` // * Curious what happens if we just have omitempty here
+	Updated  time.Time `json:"updated,omitempty"`
+	Disabled bool      `json:"disabled,omitempty"`
 }
 
 // Storage represents the suite of interfaces by which a Recruiter can be
@@ -32,7 +35,8 @@ type Creator interface {
 }
 
 type Retriever interface {
-	RetrieverRecruiter(Recruiter) (Recruiter, error)
+	RetrieveRecruiter(Recruiter) (Recruiter, error)
+	// * RetrieveRecruiters, limit 500 -- random sample?
 }
 
 type Upserter interface {

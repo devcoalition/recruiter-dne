@@ -6,6 +6,11 @@ import (
 	"time"
 )
 
+// * FOR THE API
+// - The route /user/search?email=xyz will return the status only (and perhaps user not found)
+// - The route /recruiters will return all the recruiters in the db, with email name and score
+// - The route /recruiter/:id will return indiv recruiter with email name and all reps detail
+
 // User is the domain type for a recipient-of-spam's e-mail address.
 type User struct {
 	ID      int
