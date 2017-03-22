@@ -13,11 +13,11 @@ import (
 
 // User is the domain type for a recipient-of-spam's e-mail address.
 type User struct {
-	ID      int
-	Email   string
-	Status  Status
-	Created time.Time
-	Updated time.Time
+	ID      int       `json:"id"`
+	Email   string    `json:"email"`
+	Status  Status    `json:"status"`
+	Created time.Time `json:"created,omitempty"`
+	Updated time.Time `json:"updated,omitempty"`
 }
 
 // Storage represents the suite of interfaces by which a User can be manipulated.

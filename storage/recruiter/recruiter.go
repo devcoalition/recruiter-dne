@@ -12,7 +12,7 @@ type Recruiter struct {
 	ID       int       `json:"id"`
 	Email    string    `json:"email"`
 	Name     string    `json:"name"`
-	Company  string    `json:"company,omitempty"`
+	Company  string    `json:"company"`
 	Reps     []rep.Rep `json:"reps,omitempty"`
 	Score    int       `json:"score"`
 	Created  time.Time `json:"created,omitempty"` // * Curious what happens if we just have omitempty here
@@ -36,7 +36,7 @@ type Creator interface {
 
 type Retriever interface {
 	RetrieveRecruiter(Recruiter) (Recruiter, error)
-	// * RetrieveRecruiters, limit 500 -- random sample?
+	RetrieveRecruiters(limit int) ([]Recruiter, error)
 }
 
 type Upserter interface {
